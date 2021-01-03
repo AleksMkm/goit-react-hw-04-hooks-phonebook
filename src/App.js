@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { v4 as uniqueId } from 'uuid'; // после рендера формы
 import Container from './Components/Container';
 import ContactList from './Components/ContactList';
 import ContactForm from './Components/ContactForm';
 import Section from './Components/Section';
 import Filter from './Components/Filter';
-
-function useLocalStorage(key, defaultValue) {
-  const [state, setState] = useState(() => {
-    return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue;
-  });
-
-  useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(state));
-  }, [key, state]);
-
-  return [state, setState];
-}
+import useLocalStorage from './hooks/customHooks';
 
 function App() {
   const [contacts, setContacts] = useLocalStorage('contacts', []);
